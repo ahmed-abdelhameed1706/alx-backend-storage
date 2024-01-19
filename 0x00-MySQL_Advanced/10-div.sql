@@ -1,8 +1,8 @@
 -- Create a function that safediv
 
-DELEMITER $$
+DELIMITER $$
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS FLOAT
+RETURNS FLOAT DETERMINISTIC
 BEGIN
     IF b = 0 THEN
         RETURN 0;
@@ -10,4 +10,4 @@ BEGIN
         RETURN a / b;
     END IF;
 END $$
-DELEMITER ;
+DELIMITER ;
