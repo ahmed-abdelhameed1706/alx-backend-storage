@@ -1,3 +1,5 @@
+-- creating a trigger to decrease quantity
+
 DELIMITER $$
 CREATE TRIGGER decrease_quantity AFTER INSERT ON orders
 FOR EACH ROW
