@@ -1,0 +1,2 @@
+// script to find all with name = to holberton school
+db.school.find({"name": "Holberton school"})
