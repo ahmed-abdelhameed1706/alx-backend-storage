@@ -33,4 +33,6 @@ if __name__ == "__main__":
     ips = db.aggregate(pipeline)
 
     for ip in ips:
-        print(f"\t{ip['ip']}: {ip['count']}")
+        adr = ip.get("ip")
+        count = ip.get("count")
+        print(f"\t{adr}: {count}")
