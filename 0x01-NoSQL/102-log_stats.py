@@ -26,10 +26,11 @@ if __name__ == "__main__":
     pipeline = [
             {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
             {"$sort": {"count": -1}},
-            {"$limit": 10}
+            {"$limit": 10},
+            {"$project": {"_id": 0, "ip": "$_id", "count": 1}}
             ]
 
     ips = db.aggregate(pipeline)
 
     for ip in ips:
-        print(f"\t{ip['_id']}: {ip['count']}")
+        print(f"\t{ip['ip']}: {ip['count']}")
