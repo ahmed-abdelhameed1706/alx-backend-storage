@@ -1,0 +1,2 @@
+// scrip to insert into collection a value
+db.school.insert({"name": "Holberton school"})
