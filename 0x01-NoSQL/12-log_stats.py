@@ -16,4 +16,3 @@ for method in methods:
     print(f"\tmethod {method}: {db.count_documents({'method': method})}")
 
 print(f"{db.count_documents({'method':'GET', 'path':'/status'})} status check")
-
