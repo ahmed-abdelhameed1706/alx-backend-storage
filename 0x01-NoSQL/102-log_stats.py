@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     print(f"{db.count_documents(query)} status check")
 
-    print("IPS:")
+    print("IPs:")
 
     pipeline = [
             {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
