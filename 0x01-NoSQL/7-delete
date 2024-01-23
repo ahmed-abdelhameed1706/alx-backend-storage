@@ -1,0 +1,2 @@
+// script to remove all document with name = holberton
+db.school.remove({"name": "Holberton school"})
