@@ -19,7 +19,7 @@ def cache_page(method: Callable) -> Callable:
         if page:
             return page.decode("utf-8")
         response = method(url)
-        r.set(url, response, ex=10)
+        r.setex(url, 10, response)
         return response
 
     return wrapper
