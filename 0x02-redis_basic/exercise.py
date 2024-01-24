@@ -36,9 +36,9 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
-def replay(method: Callable) -> None:
+def replay(fn: Callable):
     """function to replay what happened to a method"""
-    name = method.__qualname__
+    name = fn.__qualname__
     input_name = name + ":inputs"
     output_name = name + ":outputs"
 
@@ -91,10 +91,3 @@ class Cache:
 
     def get_int(self, data: bytes) -> int:
         return int(data)
-
-
-cache = Cache()
-cache.store("foo")
-cache.store("bar")
-cache.store(42)
-replay(cache.store)
