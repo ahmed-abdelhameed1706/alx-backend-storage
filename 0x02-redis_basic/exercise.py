@@ -29,8 +29,9 @@ def call_history(method: Callable) -> Callable:
         """function to run on the wrapped method"""
 
         self._redis.rpush(input_key, str(args))
-        self._redis.rpush(output_key, method(self, *args))
-        return method(self, *args, **kwargs)
+        result = method(self, *args)
+        self._redis.rpush(output_key, result)
+        return result
 
     return wrapper
 
