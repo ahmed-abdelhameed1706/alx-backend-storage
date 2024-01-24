@@ -31,3 +31,7 @@ def cache_page(method: Callable) -> Callable:
 def get_page(url: str) -> str:
     """function to get html from url"""
     return requests.get(url).text
+
+
+if __name__ == "__main__":
+    get_page("http://slowwly.robertomurray.co.uk")
