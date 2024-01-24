@@ -19,7 +19,7 @@ def count_calls(method: Callable) -> Callable:
         if page:
             return page.decode("utf-8")
         response = method(url)
-        r.set(f"{url}", response, 10)
+        r.set(f"{url}", response, ex=10)
         return response
 
     return wrapper
