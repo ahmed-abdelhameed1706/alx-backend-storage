@@ -29,6 +29,3 @@ def count_calls(method: Callable) -> Callable:
 def get_page(url: str) -> str:
     """function to get html from url"""
     return requests.get(url).text
-
-
-get_page("https://www.google.com")
