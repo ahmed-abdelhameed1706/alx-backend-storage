@@ -5,6 +5,8 @@ from typing import Callable
 from functools import wraps
 import redis
 
+r = redis.Redis()
+
 
 def cache_page(method: Callable) -> Callable:
     """decorator to count calls of function"""
@@ -12,7 +14,7 @@ def cache_page(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(url: str) -> str:
         """function to run on the wrapped method"""
-        r = redis.Redis()
+
         r.incr(f"count:{url}")
 
         page = r.get(url)
