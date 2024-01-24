@@ -43,11 +43,11 @@ def replay(method: Callable) -> None:
     output_name = name + ":outputs"
 
     r = redis.Redis()
-
+    calls = r.get(name).decode("utf-8")
     in_list = r.lrange(input_name, 0, -1)
     out_list = r.lrange(output_name, 0, -1)
 
-    print(f"{name} was called {len(in_list)} times:")
+    print(f"{name} was called {calls} times:")
     for input, output in zip(in_list, out_list):
         inp = input.decode("utf-8")
         out = output.decode("utf-8")
