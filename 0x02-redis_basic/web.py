@@ -15,7 +15,7 @@ def cache_page(method: Callable) -> Callable:
         r = redis.Redis()
         r.incr(f"count:{url}")
 
-        page = r.get(f"{url}")
+        page = r.get(url)
         if page:
             return page.decode("utf-8")
         response = method(url)
