@@ -30,7 +30,7 @@ class Cache:
             return formatted_data
         if fn is int:
             return self.get_int(data)
-        if fn in str:
+        if fn is str:
             return self.get_str(data)
         return data
 
