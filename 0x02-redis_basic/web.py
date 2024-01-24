@@ -6,7 +6,7 @@ from functools import wraps
 import redis
 
 
-def count_calls(method: Callable) -> Callable:
+def cache_page(method: Callable) -> Callable:
     """decorator to count calls of function"""
 
     @wraps(method)
@@ -25,7 +25,8 @@ def count_calls(method: Callable) -> Callable:
     return wrapper
 
 
-@count_calls
+@cache_page
 def get_page(url: str) -> str:
     """function to get html from url"""
-    return requests.get(url).text
+    resonse = requests.get(url)
+    return resonse.text
