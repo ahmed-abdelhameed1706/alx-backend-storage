@@ -36,7 +36,7 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
-def replay(fn: Callable):
+def replay(fn: Callable) -> None:
     """function to replay what happened to a method"""
     name = fn.__qualname__
     input_name = name + ":inputs"
