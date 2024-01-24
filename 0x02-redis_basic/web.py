@@ -19,7 +19,7 @@ def cache_page(method: Callable) -> Callable:
         if page:
             return page.decode("utf-8")
         response = method(url)
-        r.set(f"{url}", response, ex=10)
+        r.set(url, response, ex=10)
         return response
 
     return wrapper
@@ -28,5 +28,4 @@ def cache_page(method: Callable) -> Callable:
 @cache_page
 def get_page(url: str) -> str:
     """function to get html from url"""
-    resonse = requests.get(url)
-    return resonse.text
+    return requests.get(url).text
