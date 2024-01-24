@@ -36,6 +36,25 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(method: Callable) -> None:
+    """function to replay what happened to a method"""
+    name = method.__qualname__
+    input_name = name + ":inputs"
+    output_name = name + ":outputs"
+
+    r = redis.Redis()
+
+    in_list = r.lrange(input_name, 0, -1)
+    out_list = r.lrange(output_name, 0, -1)
+
+    print(f"{name} was called {len(in_list)} times:")
+    for input, output in zip(in_list, out_list):
+        inp = input.decode("utf-8")
+        out = output.decode("utf-8")
+
+        print(f"{name}(*{inp}) -> {out}")
+
+
 class Cache:
     """cache class"""
 
@@ -72,3 +91,10 @@ class Cache:
 
     def get_int(self, data: bytes) -> int:
         return int(data)
+
+
+cache = Cache()
+cache.store("foo")
+cache.store("bar")
+cache.store(42)
+replay(cache.store)
