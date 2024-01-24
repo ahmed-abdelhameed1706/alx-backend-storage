@@ -2,7 +2,7 @@
 """cache class"""
 import redis
 import uuid
-from typing import Union, Callable
+from typing import Union, Callable, Optional, Any
 
 
 class Cache:
@@ -13,13 +13,13 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: Union[str, bytes, int, float]) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> Any:
         """store method to store data in redis"""
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable = None) -> None:
+    def get(self, key: str, fn: Optional[Callable] = None) -> None:
         """function to get back data from redis"""
         data = self._redis.get(key)
         if not data:
