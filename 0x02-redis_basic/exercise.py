@@ -27,8 +27,8 @@ def call_history(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """function to run on the wrapped method"""
-        for arg in str(args):
-            self._redis.rpush(input_key, arg)
+
+        self._redis.rpush(input_key, str(args))
         self._redis.rpush(output_key, method(self, *args))
         return method(self, *args, **kwargs)
 
